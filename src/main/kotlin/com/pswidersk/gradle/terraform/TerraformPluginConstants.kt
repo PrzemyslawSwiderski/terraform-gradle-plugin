@@ -27,3 +27,7 @@ const val PLUGIN_TASKS_GROUP_NAME = "terraform"
  */
 const val TERRAFORM_SETUP_TASK_NAME = "terraformSetup"
 
+/**
+ * Default terraform version. Can be listed from [here](https://releases.hashicorp.com/terraform/).
+ */
+const val DEFAULT_TERRAFORM_VERSION = "1.9.6"

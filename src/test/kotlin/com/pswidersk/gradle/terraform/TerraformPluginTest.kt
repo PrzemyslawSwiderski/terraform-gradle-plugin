@@ -1,18 +1,19 @@
 package com.pswidersk.gradle.terraform
 
+import org.assertj.core.api.Assertions.assertThat
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.io.CleanupMode
 import org.junit.jupiter.api.io.TempDir
 import java.io.File
 
 internal class TerraformPluginTest {
 
-    @TempDir
+    @TempDir(cleanup = CleanupMode.NEVER)
     lateinit var tempDir: File
 
     @Test
@@ -21,15 +22,16 @@ internal class TerraformPluginTest {
         project.pluginManager.apply(TerraformPlugin::class.java)
 
         assertEquals(1, project.plugins.size)
-        assertEquals(1, project.tasks.size)
+        assertEquals(2, project.tasks.size)
     }
 
     @Test
     fun `test if terraform setup and version check was successful`() {
         // given
-        val expectedOutputMsg = "Terraform v0.12.28"
+        val expectedOutputMsg = "Terraform v1.9.6"
         val buildFile = File(tempDir, "build.gradle.kts")
-        buildFile.writeText("""
+        buildFile.writeText(
+            """
             import com.pswidersk.gradle.terraform.TerraformTask
             
             plugins {
@@ -41,12 +43,13 @@ internal class TerraformPluginTest {
                     args("--version")
                 }
             }
-        """.trimIndent())
+        """.trimIndent()
+        )
         val runner = GradleRunner.create()
-                .withPluginClasspath()
-                .withProjectDir(tempDir)
-                .forwardOutput()
-                .withArguments(":runTerraformVersionCheck")
+            .withPluginClasspath()
+            .withProjectDir(tempDir)
+            .forwardOutput()
+            .withArguments(":runTerraformVersionCheck")
 
         // when
         val firstRunResult = runner.build()
@@ -56,12 +59,12 @@ internal class TerraformPluginTest {
         with(firstRunResult) {
             assertEquals(TaskOutcome.SUCCESS, task(":terraformSetup")!!.outcome)
             assertEquals(TaskOutcome.SUCCESS, task(":runTerraformVersionCheck")!!.outcome)
-            Assertions.assertTrue { output.contains(expectedOutputMsg) }
+            assertThat(output).contains(expectedOutputMsg)
         }
         with(secondRunResult) {
             assertEquals(TaskOutcome.SKIPPED, task(":terraformSetup")!!.outcome)
             assertEquals(TaskOutcome.SUCCESS, task(":runTerraformVersionCheck")!!.outcome)
-            Assertions.assertTrue { output.contains(expectedOutputMsg) }
+            assertThat(output).contains(expectedOutputMsg)
         }
     }
 }

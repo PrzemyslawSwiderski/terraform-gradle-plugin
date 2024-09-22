@@ -13,7 +13,7 @@ import org.gradle.api.provider.Property
  * @return the property
  */
 internal inline fun <reified T : Any> ObjectFactory.property(): Property<T> =
-        property(T::class.javaObjectType)
+    property(T::class.javaObjectType)
 
 /**
  * Gets the [TerraformPluginExtension] that is installed on the project.
@@ -44,7 +44,3 @@ internal fun arch(): String {
         arch
     }
 }
-
-internal fun terraformSetupDir(project: Project, terraformVersion: String) = project.rootDir.resolve(GRADLE_FILES_DIR).resolve("$TERRAFORM_SETUP_DIR-v$terraformVersion")
-
-internal fun terraformExec(project: Project, terraformVersion: String) = "${terraformSetupDir(project, terraformVersion)}/terraform"

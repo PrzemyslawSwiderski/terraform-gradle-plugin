@@ -9,7 +9,7 @@ open class TerraformTask : AbstractExecTask<TerraformTask>(TerraformTask::class.
     init {
         group = PLUGIN_TASKS_GROUP_NAME
         dependsOn(TERRAFORM_SETUP_TASK_NAME)
-        executable = terraformExec(project, project.terraformPlugin.terraformVersion.get())
+        executable = project.terraformPlugin.terraformExec.get().asFile.absolutePath
     }
 
     /**

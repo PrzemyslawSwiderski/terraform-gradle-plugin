@@ -1,11 +1,12 @@
 import com.pswidersk.gradle.terraform.TerraformTask
 
 plugins {
-    id("com.pswidersk.terraform-plugin") version "1.0.0"
+    id("com.pswidersk.terraform-plugin") version "1.1.0"
 }
 
 terraformPlugin {
-    terraformVersion.set("0.13.0-beta3")
+    terraformVersion = "0.13.0-beta3"
+    terraformSetupDir = File("C:\\terraform")
 }
 
 tasks {
