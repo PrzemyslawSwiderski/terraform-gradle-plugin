@@ -57,9 +57,6 @@ Plugin behavior can be adjusted by the following properties:
 
 Sample configuration block can look like:
 ```kotlin
-plugins {
-    id("com.pswidersk.terraform-plugin")
-}
 terraformPlugin {
     terraformVersion = "1.10.0-alpha20240807"
     terraformSetupDir = File("setupDir")
