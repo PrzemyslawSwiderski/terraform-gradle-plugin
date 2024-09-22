@@ -30,6 +30,7 @@ class ListPropertiesTest {
             .forwardOutput()
             .withArguments(":listPluginProperties")
         val expectedSetupPath = tempDir.resolve(".gradle").resolve("terraformClient-v1.9.6").absolutePath
+        val expectedPackageName = "terraform_1.9.6_${os()}_${arch()}.zip"
 
         // when
         val runResult = runner.build()
@@ -40,8 +41,8 @@ class ListPropertiesTest {
             assertThat(output).contains(
                 "Terraform version: 1.9.6",
                 "Setup directory: $expectedSetupPath",
-                "Terraform package: terraform_1.9.6_windows_amd64.zip",
-                "Terraform download URL: https://releases.hashicorp.com/terraform/1.9.6/terraform_1.9.6_windows_amd64.zip"
+                "Terraform package: $expectedPackageName",
+                "Terraform download URL: https://releases.hashicorp.com/terraform/1.9.6/$expectedPackageName"
             )
         }
     }
