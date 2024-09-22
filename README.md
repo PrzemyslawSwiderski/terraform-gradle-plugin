@@ -21,7 +21,7 @@ All major operating systems such as Linux, Windows, Mac OS are supported.
 2. Configure a plugin by specifying desired terraform version in build script:
     ```kotlin
     terraformPlugin {
-        terraformVersion.set("0.12.28")
+        terraformVersion.set("1.9.6")
     }
     ```
 3. Define a task to run desired terraform client command, for example:
