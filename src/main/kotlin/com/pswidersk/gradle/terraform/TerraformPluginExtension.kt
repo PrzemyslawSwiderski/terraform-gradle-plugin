@@ -31,11 +31,15 @@ open class TerraformPluginExtension @Inject constructor(
     )
 
     val terraformPackage: Property<String> = objects.property<String>().convention(
-        "terraform_${terraformVersion.get()}_${os()}_${arch()}.zip"
+        providerFactory.provider {
+            "terraform_${terraformVersion.get()}_${os()}_${arch()}.zip"
+        }
     )
 
     val terraformDownloadUrl: Property<String> = objects.property<String>().convention(
-        "https://releases.hashicorp.com/terraform/${terraformVersion.get()}/${terraformPackage.get()}"
+        providerFactory.provider {
+            "https://releases.hashicorp.com/terraform/${terraformVersion.get()}/${terraformPackage.get()}"
+        }
     )
 
     internal val terraformExec: RegularFileProperty = objects.fileProperty().convention(

@@ -86,4 +86,41 @@ class ListPropertiesTest {
         }
     }
 
+    @Test
+    fun `test if properties are properly lazy loaded`() {
+        // given
+        val buildFile = File(tempDir, "build.gradle.kts")
+        buildFile.writeText(
+            """
+            plugins {
+                id("com.pswidersk.terraform-plugin")
+            }
+            terraformPlugin {
+                terraformVersion = "1.10.0"
+            }
+        """.trimIndent()
+        )
+        val runner = GradleRunner.create()
+            .withPluginClasspath()
+            .withProjectDir(tempDir)
+            .forwardOutput()
+            .withArguments("--configuration-cache", ":listPluginProperties")
+        val expectedSetupPath = tempDir.resolve(".gradle").resolve("terraformClient-v1.10.0").absolutePath
+        val expectedPackageName = "terraform_1.10.0_${os()}_${arch()}.zip"
+
+        // when
+        val runResult = runner.build()
+
+        // then
+        with(runResult) {
+            assertThat(task(":listPluginProperties")!!.outcome).isEqualTo(TaskOutcome.SUCCESS)
+            assertThat(output).contains(
+                "Terraform version: 1.10.0",
+                "Setup directory: $expectedSetupPath",
+                "Terraform package: $expectedPackageName",
+                "Terraform download URL: https://releases.hashicorp.com/terraform/1.10.0/$expectedPackageName"
+            )
+        }
+    }
+
 }

@@ -35,10 +35,9 @@ gradlePlugin {
         create("terraform-gradle-plugin") {
             id = "com.pswidersk.terraform-plugin"
             implementationClass = "com.pswidersk.gradle.terraform.TerraformPlugin"
-            displayName = "Simple Plugin to wrap Terraform executable as task. "
-                .plus("https://github.com/PrzemyslawSwiderski/terraform-gradle-plugin")
+            displayName = "Simple Plugin to wrap Terraform executable as task."
             description = "Simple Plugin to wrap Terraform executable as task."
-            tags = listOf("terraform")
+            tags = listOf("terraform", "devops", "infra")
         }
     }
 }
