@@ -1,7 +1,7 @@
 import com.pswidersk.gradle.terraform.TerraformTask
 
 plugins {
-    id("com.pswidersk.terraform-plugin") version "1.1.1"
+    id("com.pswidersk.terraform-plugin") version "1.2.0"
 }
 
 terraformPlugin {
