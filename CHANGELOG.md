@@ -6,6 +6,14 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+### Changed
+
+### Removed
+
+## 1.2.0 - 2025-08-16
+
+### Added
+
 - Gradle Config cache support.
 
 ### Changed
