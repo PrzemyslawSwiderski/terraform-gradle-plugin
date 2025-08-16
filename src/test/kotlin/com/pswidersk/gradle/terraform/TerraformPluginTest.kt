@@ -28,7 +28,7 @@ internal class TerraformPluginTest {
     @Test
     fun `test if terraform setup and version check was successful`() {
         // given
-        val expectedOutputMsg = "Terraform v1.9.6"
+        val expectedOutputMsg = "Terraform v1.12.2"
         val buildFile = File(tempDir, "build.gradle.kts")
         buildFile.writeText(
             """
@@ -65,6 +65,41 @@ internal class TerraformPluginTest {
             assertEquals(TaskOutcome.SKIPPED, task(":terraformSetup")!!.outcome)
             assertEquals(TaskOutcome.SUCCESS, task(":runTerraformVersionCheck")!!.outcome)
             assertThat(output).contains(expectedOutputMsg)
+        }
+    }
+
+    @Test
+    fun `test config cache support`() {
+        // given
+        val buildFile = File(tempDir, "build.gradle.kts")
+        buildFile.writeText(
+            """
+            import com.pswidersk.gradle.terraform.TerraformTask
+            
+            plugins {
+                id("com.pswidersk.terraform-plugin")
+            }
+            
+            tasks {
+                register<TerraformTask>("runTerraformVersionCheck") {
+                    args("--version")
+                }
+            }
+        """.trimIndent()
+        )
+        val runner = GradleRunner.create()
+            .withPluginClasspath()
+            .withProjectDir(tempDir)
+            .forwardOutput()
+            .withArguments("--configuration-cache", ":runTerraformVersionCheck")
+
+        // when
+        val runResult = runner.build()
+
+        // then
+        with(runResult) {
+            assertEquals(TaskOutcome.SUCCESS, task(":terraformSetup")!!.outcome)
+            assertEquals(TaskOutcome.SUCCESS, task(":runTerraformVersionCheck")!!.outcome)
         }
     }
 }

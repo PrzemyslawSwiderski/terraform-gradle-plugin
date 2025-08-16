@@ -10,8 +10,7 @@ import org.gradle.api.provider.ProviderFactory
 import javax.inject.Inject
 
 
-@Suppress("UNUSED_PARAMETER")
-open class TerraformPluginExtension @Inject constructor(
+abstract class TerraformPluginExtension @Inject constructor(
     project: Project,
     providerFactory: ProviderFactory,
     objects: ObjectFactory,
@@ -48,4 +47,9 @@ open class TerraformPluginExtension @Inject constructor(
         }
     )
 
+    internal val terraformPackageFile: RegularFileProperty = objects.fileProperty().convention(
+        providerFactory.provider {
+            terraformSetupDir.get().file(terraformPackage.get())
+        }
+    )
 }

@@ -4,9 +4,9 @@
 
 Simple Gradle plugin to wrap [Terraform](https://www.terraform.io/) executable as tasks.
 
-By using this plugin there is no need to download and install terraform client.
+By using this plugin, there is no need to download and install a terraform client.
 Downloading Terraform executable and unpacking is done by `terraformSetup` task.
-All major operating systems such as Linux, Windows, Mac OS are supported.
+All major operating systems such as Linux, Windows, macOS are supported.
 
 ## Requirements
 
@@ -18,13 +18,13 @@ All major operating systems such as Linux, Windows, Mac OS are supported.
 
 1. Apply a plugin to a project as described
    on [gradle portal](https://plugins.gradle.org/plugin/com.pswidersk.terraform-plugin).
-2. Configure a plugin by specifying desired terraform version in build script:
+2. Configure a plugin by specifying a desired terraform version in a build script:
     ```kotlin
     terraformPlugin {
         terraformVersion.set("1.9.6")
     }
     ```
-3. Define a task to run desired terraform client command, for example:
+3. Define a task to run the desired terraform client command, for example:
     ```kotlin
     tasks {
         register<TerraformTask>("terraformHelp") {
@@ -32,7 +32,7 @@ All major operating systems such as Linux, Windows, Mac OS are supported.
         }
     }
     ```
-4. Run terraform command from gradle:
+4. Run terraform command from Gradle:
     ```shell script
     # Linux
     ./gradlew :terraformHelp
@@ -46,7 +46,7 @@ All major operating systems such as Linux, Windows, Mac OS are supported.
 
 Plugin behavior can be adjusted by the following properties:
 
-- `terraformVersion` - version of Terraform to be downloaded, `1.9.6` by default
+- `terraformVersion` - version of Terraform to be downloaded, `1.12.2` by default
 - `terraformSetupDir` - Terraform installation directory, by default
   `<project_dir>/.gradle/terraformClient-v<terraformVersion>`
 - `terraformPackage` - name of the package to download and save as, by default
@@ -56,6 +56,7 @@ Plugin behavior can be adjusted by the following properties:
   `https://releases.hashicorp.com/terraform/${terraformVersion.get()}/${terraformPackage.get()}`
 
 Sample configuration block can look like:
+
 ```kotlin
 terraformPlugin {
     terraformVersion = "1.10.0-alpha20240807"

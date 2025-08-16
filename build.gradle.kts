@@ -1,3 +1,6 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.pluginPublish)
@@ -11,20 +14,24 @@ repositories {
 
 dependencies {
     implementation(gradleKotlinDsl())
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation(libs.jupiter)
     testImplementation(libs.jupiterParams)
     testImplementation(libs.assertj)
 }
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(11)
-    }
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 tasks {
     test {
         useJUnitPlatform()
+    }
+    withType<KotlinCompile> {
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_11
+        }
     }
 }
 

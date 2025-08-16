@@ -4,7 +4,7 @@ import org.apache.tools.ant.types.Commandline
 import org.gradle.api.tasks.AbstractExecTask
 import org.gradle.api.tasks.options.Option
 
-open class TerraformTask : AbstractExecTask<TerraformTask>(TerraformTask::class.java) {
+abstract class TerraformTask : AbstractExecTask<TerraformTask>(TerraformTask::class.java) {
 
     init {
         group = PLUGIN_TASKS_GROUP_NAME
@@ -14,7 +14,7 @@ open class TerraformTask : AbstractExecTask<TerraformTask>(TerraformTask::class.
 
     /**
      * Parses an argument list from {@code args} and passes it to args.
-     * It overrides any args passed to task in build script.
+     * It overrides any args passed to task in a build script.
      *
      * <p>
      * The parser supports both single quote ({@code '}) and double quote ({@code "}) as quote delimiters.

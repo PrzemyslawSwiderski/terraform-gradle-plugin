@@ -13,7 +13,7 @@ const val TERRAFORM_PLUGIN_EXTENSION_NAME = "terraformPlugin"
 const val GRADLE_FILES_DIR = ".gradle"
 
 /**
- * Directory where terraform client will be downloaded and stored.
+ * Directory where a terraform client will be downloaded and stored.
  */
 const val TERRAFORM_SETUP_DIR = "terraformClient"
 
@@ -23,11 +23,11 @@ const val TERRAFORM_SETUP_DIR = "terraformClient"
 const val PLUGIN_TASKS_GROUP_NAME = "terraform"
 
 /**
- * Name of task to setup terraform.
+ * Name of a task to set up terraform.
  */
 const val TERRAFORM_SETUP_TASK_NAME = "terraformSetup"
 
 /**
  * Default terraform version. Can be listed from [here](https://releases.hashicorp.com/terraform/).
  */
-const val DEFAULT_TERRAFORM_VERSION = "1.9.6"
+const val DEFAULT_TERRAFORM_VERSION = "1.12.2"

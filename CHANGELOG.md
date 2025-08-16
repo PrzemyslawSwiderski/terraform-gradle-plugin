@@ -6,9 +6,17 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Gradle Config cache support.
+
 ### Changed
 
+- Dependencies update.
+- Default Terraform version -> `1.12.2`.
+- Gradle `8.14.3` main build version.
+
 ### Removed
+
+- Gradle `6.x` support.
 
 ## 1.1.1 - 2024-09-23
 

@@ -6,8 +6,6 @@ import org.gradle.testkit.runner.TaskOutcome
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
 import java.io.File
-import kotlin.io.writeText
-import kotlin.text.trimIndent
 
 class ListPropertiesTest {
     @TempDir
@@ -24,13 +22,14 @@ class ListPropertiesTest {
             }
         """.trimIndent()
         )
+        val expectedVersion = "1.12.2"
         val runner = GradleRunner.create()
             .withPluginClasspath()
             .withProjectDir(tempDir)
             .forwardOutput()
             .withArguments(":listPluginProperties")
-        val expectedSetupPath = tempDir.resolve(".gradle").resolve("terraformClient-v1.9.6").absolutePath
-        val expectedPackageName = "terraform_1.9.6_${os()}_${arch()}.zip"
+        val expectedSetupPath = tempDir.resolve(".gradle").resolve("terraformClient-v$expectedVersion").absolutePath
+        val expectedPackageName = "terraform_${expectedVersion}_${os()}_${arch()}.zip"
 
         // when
         val runResult = runner.build()
@@ -39,10 +38,10 @@ class ListPropertiesTest {
         with(runResult) {
             assertThat(task(":listPluginProperties")!!.outcome).isEqualTo(TaskOutcome.SUCCESS)
             assertThat(output).contains(
-                "Terraform version: 1.9.6",
+                "Terraform version: $expectedVersion",
                 "Setup directory: $expectedSetupPath",
                 "Terraform package: $expectedPackageName",
-                "Terraform download URL: https://releases.hashicorp.com/terraform/1.9.6/$expectedPackageName"
+                "Terraform download URL: https://releases.hashicorp.com/terraform/$expectedVersion/$expectedPackageName"
             )
         }
     }

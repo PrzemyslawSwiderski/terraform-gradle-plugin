@@ -21,7 +21,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      # Check out current repository
+      # Check out the current repository
       - name: Fetch Sources
         uses: actions/checkout@v4
         with:
