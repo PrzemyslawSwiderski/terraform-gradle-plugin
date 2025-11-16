@@ -6,7 +6,7 @@ pluginManagement {
     val pluginVersionForExamples: String by settings
 
     plugins {
-        id("com.pswidersk.python-uv-plugin") version pluginVersionForExamples
+        id("com.pswidersk.terraform-plugin") version pluginVersionForExamples
     }
 
     repositories {
