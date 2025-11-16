@@ -22,7 +22,7 @@ class ListPropertiesTest {
             }
         """.trimIndent()
         )
-        val expectedVersion = "1.12.2"
+        val expectedVersion = "1.13.5"
         val runner = GradleRunner.create()
             .withPluginClasspath()
             .withProjectDir(tempDir)

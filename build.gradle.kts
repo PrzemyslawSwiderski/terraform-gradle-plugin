@@ -4,8 +4,9 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     alias(libs.plugins.kotlin)
     alias(libs.plugins.pluginPublish)
-    alias(libs.plugins.changelog)
 }
+
+version = System.getenv("PLUGIN_VERSION") ?: "unspecified"
 
 repositories {
     mavenLocal()
@@ -55,7 +56,3 @@ publishing {
     }
 }
 
-// Configuring changelog Gradle plugin https://github.com/JetBrains/gradle-changelog-plugin
-changelog {
-    groups = listOf("Added", "Changed", "Removed")
-}
