@@ -1,6 +1,6 @@
 [versions]
 # libraries
-junit = "5.13.4" # https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+junit = "5.14.1" # https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 assertj = "3.27.6"  # https://mvnrepository.com/artifact/org.assertj/assertj-core
 
 # plugins
