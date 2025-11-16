@@ -4,9 +4,11 @@ plugins {
     id("com.pswidersk.terraform-plugin") version "1.2.0"
 }
 
+val userHome = providers.systemProperty("user.home").get()
+
 terraformPlugin {
-    terraformVersion = "0.13.0-beta3"
-    terraformSetupDir = File("C:\\terraform")
+    terraformVersion = "1.12.2"
+    terraformSetupDir = File(userHome).resolve(".tf")
 }
 
 tasks {

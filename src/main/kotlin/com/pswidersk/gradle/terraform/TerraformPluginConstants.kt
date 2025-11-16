@@ -30,4 +30,4 @@ const val TERRAFORM_SETUP_TASK_NAME = "terraformSetup"
 /**
  * Default terraform version. Can be listed from [here](https://releases.hashicorp.com/terraform/).
  */
-const val DEFAULT_TERRAFORM_VERSION = "1.12.2"
+const val DEFAULT_TERRAFORM_VERSION = "1.13.5"

@@ -46,7 +46,7 @@ All major operating systems such as Linux, Windows, macOS are supported.
 
 Plugin behavior can be adjusted by the following properties:
 
-- `terraformVersion` - version of Terraform to be downloaded, `1.12.2` by default
+- `terraformVersion` - version of Terraform to be downloaded, `1.13.5` by default
 - `terraformSetupDir` - Terraform installation directory, by default
   `<project_dir>/.gradle/terraformClient-v<terraformVersion>`
 - `terraformPackage` - name of the package to download and save as, by default

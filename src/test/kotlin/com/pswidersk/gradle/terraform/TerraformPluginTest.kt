@@ -28,7 +28,7 @@ internal class TerraformPluginTest {
     @Test
     fun `test if terraform setup and version check was successful`() {
         // given
-        val expectedOutputMsg = "Terraform v1.12.2"
+        val expectedOutputMsg = "Terraform v1.13.5"
         val buildFile = File(tempDir, "build.gradle.kts")
         buildFile.writeText(
             """
