@@ -1,3 +1,6 @@
+[![🥁 Build](https://github.com/PrzemyslawSwiderski/terraform-gradle-plugin/actions/workflows/build.yml/badge.svg)](https://github.com/PrzemyslawSwiderski/terraform-gradle-plugin/actions/workflows/build.yml)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/PrzemyslawSwiderski/terraform-gradle-plugin?label=Plugin%20Version&sort=semver&style=plastic)](https://plugins.gradle.org/plugin/com.pswidersk.terraform-plugin)
+
 # [Gradle Terraform plugin](https://plugins.gradle.org/plugin/com.pswidersk.terraform-plugin)
 
 ## About

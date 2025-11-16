@@ -15,14 +15,11 @@ repositories {
 
 dependencies {
     implementation(gradleKotlinDsl())
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-    testImplementation(libs.jupiter)
-    testImplementation(libs.jupiterParams)
-    testImplementation(libs.assertj)
+    testImplementation(libs.bundles.test)
 }
 
 java {
-    targetCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 tasks {
@@ -31,7 +28,7 @@ tasks {
     }
     withType<KotlinCompile> {
         compilerOptions {
-            jvmTarget = JvmTarget.JVM_11
+            jvmTarget = JvmTarget.JVM_17
         }
     }
 }
