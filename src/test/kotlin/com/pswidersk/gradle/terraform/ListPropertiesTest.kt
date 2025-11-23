@@ -1,5 +1,6 @@
 package com.pswidersk.gradle.terraform
 
+import org.apache.tools.ant.taskdefs.condition.Os
 import org.assertj.core.api.Assertions.assertThat
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
@@ -28,7 +29,7 @@ class ListPropertiesTest {
             .withProjectDir(tempDir)
             .forwardOutput()
             .withArguments(":listPluginProperties")
-        val expectedSetupPath = tempDir.resolve(".gradle").resolve("terraformClient-v$expectedVersion").absolutePath
+        val expectedSetupPath = tempDir.resolve(".gradle").resolve("terraformClient-v$expectedVersion")
         val expectedPackageName = "terraform_${expectedVersion}_${os()}_${arch()}.zip"
 
         // when
@@ -39,7 +40,7 @@ class ListPropertiesTest {
             assertThat(task(":listPluginProperties")!!.outcome).isEqualTo(TaskOutcome.SUCCESS)
             assertThat(output).contains(
                 "Terraform version: $expectedVersion",
-                "Setup directory: $expectedSetupPath",
+                "Setup directory: ${sysDepPath(expectedSetupPath)}",
                 "Terraform package: $expectedPackageName",
                 "Terraform download URL: https://releases.hashicorp.com/terraform/$expectedVersion/$expectedPackageName"
             )
@@ -68,7 +69,7 @@ class ListPropertiesTest {
             .withProjectDir(tempDir)
             .forwardOutput()
             .withArguments("--configuration-cache", ":listPluginProperties")
-        val expectedSetupPath = tempDir.resolve("setupDir").absolutePath
+        val expectedSetupPath = tempDir.resolve("setupDir")
 
         // when
         val runResult = runner.build()
@@ -78,7 +79,7 @@ class ListPropertiesTest {
             assertThat(task(":listPluginProperties")!!.outcome).isEqualTo(TaskOutcome.SUCCESS)
             assertThat(output).contains(
                 "Terraform version: 1.10.0-alpha20240807",
-                "Setup directory: $expectedSetupPath",
+                "Setup directory: ${sysDepPath(expectedSetupPath)}",
                 "Terraform package: customTerraform.zip",
                 "Terraform download URL: https://proxy-terraform/terraform.zip"
             )
@@ -104,7 +105,7 @@ class ListPropertiesTest {
             .withProjectDir(tempDir)
             .forwardOutput()
             .withArguments("--configuration-cache", ":listPluginProperties")
-        val expectedSetupPath = tempDir.resolve(".gradle").resolve("terraformClient-v1.10.0").absolutePath
+        val expectedSetupPath = tempDir.resolve(".gradle").resolve("terraformClient-v1.10.0")
         val expectedPackageName = "terraform_1.10.0_${os()}_${arch()}.zip"
 
         // when
@@ -115,10 +116,18 @@ class ListPropertiesTest {
             assertThat(task(":listPluginProperties")!!.outcome).isEqualTo(TaskOutcome.SUCCESS)
             assertThat(output).contains(
                 "Terraform version: 1.10.0",
-                "Setup directory: $expectedSetupPath",
+                "Setup directory: ${sysDepPath(expectedSetupPath)}",
                 "Terraform package: $expectedPackageName",
                 "Terraform download URL: https://releases.hashicorp.com/terraform/1.10.0/$expectedPackageName"
             )
+        }
+    }
+
+    private fun sysDepPath(inputFile: File): String {
+        return if (Os.isFamily(Os.FAMILY_MAC)) {
+            "/private${inputFile.path}"
+        } else {
+            inputFile.path
         }
     }
 

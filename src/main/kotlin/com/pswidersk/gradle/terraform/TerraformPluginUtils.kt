@@ -37,10 +37,17 @@ internal fun os(): String {
  * Returns system architecture name
  */
 internal fun arch(): String {
-    val arch = System.getProperty("os.arch")
-    return if (arch == "x86_64") {
-        "amd64"
-    } else {
-        arch
+    return when (val arch = System.getProperty("os.arch")) {
+        "x86_64" -> {
+            "amd64"
+        }
+
+        "aarch64" -> {
+            "arm64"
+        }
+
+        else -> {
+            arch
+        }
     }
 }
