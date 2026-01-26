@@ -1,7 +1,7 @@
 [versions]
 # libraries
 junit = "6.0.2" # https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-assertj = "3.27.6"  # https://mvnrepository.com/artifact/org.assertj/assertj-core
+assertj = "3.27.7"  # https://mvnrepository.com/artifact/org.assertj/assertj-core
 
 # plugins
 kotlin = "2.3.0" # https://kotlinlang.org/docs/releases.html
