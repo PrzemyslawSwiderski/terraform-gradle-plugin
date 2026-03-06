@@ -5,7 +5,7 @@ assertj = "3.27.7"  # https://mvnrepository.com/artifact/org.assertj/assertj-cor
 
 # plugins
 kotlin = "2.3.10" # https://kotlinlang.org/docs/releases.html
-pluginPublish = "2.0.0" # https://plugins.gradle.org/plugin/com.gradle.plugin-publish
+pluginPublish = "2.1.0" # https://plugins.gradle.org/plugin/com.gradle.plugin-publish
 
 [libraries]
 jupiterPlatform = { group = "org.junit.platform", name = "junit-platform-launcher" }
