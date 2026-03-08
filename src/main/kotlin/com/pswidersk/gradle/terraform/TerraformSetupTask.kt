@@ -2,10 +2,12 @@ package com.pswidersk.gradle.terraform
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.internal.file.FileOperations
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.TaskAction
 import java.net.URI
 import javax.inject.Inject
 
+@CacheableTask
 abstract class TerraformSetupTask @Inject constructor(
     private val fileOperations: FileOperations
 ) : DefaultTask() {

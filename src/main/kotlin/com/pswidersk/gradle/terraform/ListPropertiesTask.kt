@@ -1,9 +1,10 @@
 package com.pswidersk.gradle.terraform
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.TaskAction
-import kotlin.text.trimIndent
 
+@CacheableTask
 abstract class ListPropertiesTask : DefaultTask() {
 
     private val terraformExtension: TerraformPluginExtension = project.terraformPlugin
