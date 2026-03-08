@@ -2,8 +2,10 @@ package com.pswidersk.gradle.terraform
 
 import org.apache.tools.ant.types.Commandline
 import org.gradle.api.tasks.AbstractExecTask
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.options.Option
 
+@CacheableTask
 abstract class TerraformTask : AbstractExecTask<TerraformTask>(TerraformTask::class.java) {
 
     init {
